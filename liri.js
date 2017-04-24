@@ -6,12 +6,40 @@
 // console.log(parseFloat(process.argv[2]) + parseFloat(process.argv[3]));
 // Liri Homework 
 
-var = require("fs");
+
+//  Resource setup 
+
+
+ 
+var client = new Twitter({
+  consumer_key: '',
+  consumer_secret: '',
+  access_token_key: '',
+  access_token_secret: ''
+});
+ 
+var params = {screen_name: 'nodejs'};
+client.get('statuses/user_timeline', params, function(error, tweets, response) {
+  if (!error) {
+    console.log(tweets);
+  }
+});
+
+// Requirements 
+var logFile = require("fs");        // Output to logfile
+var twitter = require('twitter');
+var spotify = require('spotify');
+var request = require("request");   // OMDB - movie query 
+
+
+
+var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&r=json";
 
 
 
 
 
+    
 switch(process.argv[3]) {
 
         case 'my-tweets':
@@ -41,6 +69,9 @@ switch(process.argv[3]) {
 function logCmd()
 {
 
+// Logfile - logFile 
+
+
 
 } // Log commmands
 
@@ -55,6 +86,8 @@ logCmd();
 function movie()
 {
 
+var queryUrl = "http://www.omdbapi.com/?t=" + movieName + "&y=&plot=short&r=json";
+
 logCmd();
 } // Movies
 
@@ -68,6 +101,15 @@ logCmd();
 
 function spotify()
 {
+
+    spotify.search({ type: 'track', query: 'dancing in the moonlight' }, function(err, data) {
+    if ( err ) {
+        console.log('Error occurred: ' + err);
+        return;
+    }
+ 
+    // Do something with 'data' 
+});
 
 logToTxt();
 } // Spotify read/write
