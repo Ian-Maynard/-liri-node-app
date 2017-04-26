@@ -81,15 +81,28 @@ request(queryUrl, function(error, response, body) {
 
     // Parse the body of the site and recover just the imdbRating
     // (Note: The syntax below for parsing isn't obvious. Just spend a few moments dissecting it).
-    console.log("Release Year: " + JSON.parse(body).Year);
-    console.log("TItle: " + JSON.parse(body).Title);
-    console.log("IMDB Rating: " + JSON.parse(body).Value);
-    console.log("Country: " + JSON.parse(body).Country);
-    console.log("Language: " + JSON.parse(body).Language);
-    console.log("Plot: " + JSON.parse(body).Plot);
-    console.log("Actors: " + JSON.parse(body).Actors);
-    console.log("Rotten Tomatoes URL: " + JSON.parse(body).tomatoURL);
+
+    var mYear     = JSON.parse(body).Year;
+    var mTitle    = JSON.parse(body).Title;
+    var mRating   = JSON.parse(body).Title;
+    var mCountry  = JSON.parse(body).Country;
+    var mLanguage = JSON.parse(body).Language;
+    var mPlot     = JSON.parse(body).PLot;
+    var mActors   = JSON.parse(body).Actors;
+    var mUrl      = JSON.parse(body).tomatoURL;
+
+    var outPut1   =  'The movie: '+mTitle+',  starring: '+mActors+' was released in '+mYear+'. \n';
+    var outPut2   =  mTitle+' was filmed in '+mCountry+' and is offered in '+mLanguage+'.\n';
+    var outPut3   =  mPlot+"\n";
+    var outPut4   =  'The URL is: '+mUrl+'\n';
+
+    console.log(outPut1);
+    console.log(outPut2);
+    console.log(outPut3);
+    console.log(outPut4);
+    
   }
+  
   else {
     console.log("Sorry, I don't know that movie!");
   }
@@ -124,6 +137,11 @@ var aSong=arg; // The Argument is now a song
 } // Spottify 
 
 
+function myTweets() {
+
+
+} // End 
+
 
 switch(commAnd) {
 
@@ -149,13 +167,6 @@ switch(commAnd) {
 
 
 
-
-
-
-
-// function twitter(){
-
-// }// Twitter read/write
 
 
 
