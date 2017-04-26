@@ -1,72 +1,70 @@
-
-// Combines two command line arguments (strings).
-// console.log(process.argv[2] + process.argv[3]);
-
-// Adds two command line arguments (numbers).
-// console.log(parseFloat(process.argv[2]) + parseFloat(process.argv[3]));
 // Liri Homework 
-
-
-
 //  Resource setup - Twitter Keys, Node Packages, 
 
-var client = new Twitter({
-  consumer_key: '',
-  consumer_secret: '',
-  access_token_key: '',
-  access_token_secret: ''
-});
+// var client = new Twitter({
+//   consumer_key: '',
+//   consumer_secret: '',
+//   access_token_key: '',
+//   access_token_secret: ''
+// });
  
-var params = {screen_name: 'nodejs'};
-client.get('statuses/user_timeline', params, function(error, tweets, response) {
-  if (!error) {
-    console.log(tweets);
-  }
-});
+// var params = {screen_name: 'nodejs'};
+// client.get('statuses/user_timeline', params, function(error, tweets, response) {
+//   if (!error) {
+//     console.log(tweets);
+//   }
+// });
 
 // Requirements 
 var logFile = require("fs");         // Output to logfile
-var twitter = require('twitter');    // Twitter // 
+// var twitter = require('twitter');    // Twitter // 
 var spotify = require('spotify');    // Spotify
 var request = require("request");    // OMDB - movie query 
 var fullArg = process.argv.slice(2); // Strip System String
 var nullArg = false;                 // Flag for missing arguements
-var commArg = argPar(fullArg);
+var commArg = argPar();
 var commAnd = commArg[0];
 var argUmnt = commArg[1];
 
 
+console.log(commAnd," - ",argUmnt);
 
-switch(commAnd) {
+function argPar(){
+// Parses command line arguements
+var c=fullArg[0]; // Get the command
+var a=fullArg.slice(1);
+var tempO=a; 
 
-        case 'my-tweets':
-            ;
-       
-        break;
-
-        case 'spotify-this-song':
-        spotReq(argUmnt);
-        break;
-
-        case 'movie-this':
-        movie(argUmnt);
-        break;
-
-		case 'do-what-it-says':
-       
-        break;
-
-        default:
-        console.log('I did not understand that');
-        break;
+if (a === null) {
+    nullArg=true; // No arguments to pass
+    return [c,a];
 }
+else {
+    a=tempO.join(' '); // Returns one contiguos argument 
+     return [c,a]; // Returns Command and Argument
+ }
+
+} //
 
 
+function logCmd(c, a) {
+var enTry = "\n--------------" + "\n" + c + " : " + a +"\n----------------"
+    logFile.appendFile("logs.txt", enTry , function(err) {
+     //if an error occurs
+      if (err) {
+        console.log(err);
+      }
+      else {
+        console.log("Log entry added.");
+      }
+    });
+} // Log commmands & Arguments
 
 function movie(mov)
 {
-
 var movName = mov;
+
+console.log("movName is ", movName);
 
 if (movName === null) {
     movName="Mr. Nobody";
@@ -100,21 +98,6 @@ request(queryUrl, function(error, response, body) {
 } // End Movies
 
 
-
-
-
-
-
-
-// function doWhat()
-// {
-
-// logCmd();
-// } // End Do what I say 
-
-
-
-
 function spotReq(arg) {
 
 if (nullArg){
@@ -137,41 +120,40 @@ var aSong=arg; // The Argument is now a song
 
   });
 
-} 
+} // Spottify 
 
 
-function argPar(){
-// Parses command line arguements
-var c=fullArg[0]; // Get the command
-var a=fullArg[1]; // Get the arguments
-var t=a; 
 
-if (a === null) {
-    nullArg=true; // No arguments to pass
-    return [c,a];
+switch(commAnd) {
+
+        case commAnd=='my-tweets':
+        break;
+
+        case commAnd=='spotify-this-song':
+        spotReq(argUmnt);
+        logCmd(commAnd,argUmnt);
+        break;
+
+        case commAnd=='movie-this':
+        movie(argUmnt);
+        logCmd(commAnd,argUmnt);
+        break;
+
+		case commAnd=='do-what-it-says':
+        break;
+
+        default:
+        console.log('I did not understand that ',commAnd);
 }
-else {
-    a=t.join(' '); // Returns one contigous argument 
-     return [c,a]; // Returns Command and Argument
- }
-
-} //
-
-
-// function logCmd()
-// {
-
-// // Logfile - logFile 
 
 
 
-// } // Log commmands
+
 
 
 
 // function twitter(){
 
-// logCmd();
 // }// Twitter read/write
 
 
