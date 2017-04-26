@@ -60,6 +60,7 @@ var enTry = "\n--------------" + "\n" + c + " : " + a +"\n----------------"
     });
 } // Log commmands & Arguments
 
+
 function movie(mov)
 {
 var movName = mov;
@@ -126,20 +127,20 @@ var aSong=arg; // The Argument is now a song
 
 switch(commAnd) {
 
-        case commAnd=='my-tweets':
+        case 'my-tweets':
         break;
 
-        case commAnd=='spotify-this-song':
+        case 'spotify-this-song':
         spotReq(argUmnt);
         logCmd(commAnd,argUmnt);
         break;
 
-        case commAnd=='movie-this':
+        case 'movie-this':
         movie(argUmnt);
         logCmd(commAnd,argUmnt);
         break;
 
-		case commAnd=='do-what-it-says':
+		case 'do-what-it-says':
         break;
 
         default:
